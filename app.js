@@ -14,12 +14,8 @@ const API_TOKEN = process.env.API_TOKEN;
 const web = new WebClient(API_TOKEN);
 const conversationId = process.env.CONVERSATIONID;
 
-// app.use("/slack", require("./slack"));
-
 app.post("/slack", (req, res) => {
   (async () => {
-    // Post a message to the channel, and await the result.
-    // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
     const result = await web.chat.postMessage({
       text:
         "*이름 :* " +
@@ -33,19 +29,18 @@ app.post("/slack", (req, res) => {
       channel: conversationId,
     });
 
-    // The result contains an identifier for the message, `ts`.
     console.log(
       `Successfully send message ${result} in conversation ${conversationId}`
     );
-    res.status(200).send("페이지에 성공적으로 들어왔습니다. ");
-    res.status(404).send("slack 페이지입니다. ");
-    res.send({ code: 200, message: "메시지가 성공적으로 전송되었습니다. " });
+    
+    res.status(404).send({ code: 404, message: "메시지가 전송되지 못하였습니다. " });
+    res.status(200).send({ code: 200, message: "메시지가 성공적으로 전송되었습니다. " });
   })();
 });
 
-// app.use((req, res, next) => { // 기본경로나 /user말고 다른곳 진입했을경우 실행
-//     res.status(404).send('Not Found');
-// });
+app.use((req, res, next) => { // 기본경로나 /user말고 다른곳 진입했을경우 실행
+    res.status(404).send('Not Found');
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
