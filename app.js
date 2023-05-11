@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use("/", require("./slack"));
+app.use("/slack", require("./slack"));
 
 app.use((req, res, next) => { // 기본경로나 /user말고 다른곳 진입했을경우 실행
     res.status(404).send('Not Found');
