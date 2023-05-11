@@ -28,6 +28,8 @@ router.post("/", (req, res) => {
     console.log(
       `Successfully send message ${result} in conversation ${conversationId}`
     );
+    res.status(200).send('페이지에 성공적으로 들어왔습니다. ');
+    res.status(404).send('slack 페이지입니다. ');
     res.send({ code: 200, message: "메시지가 성공적으로 전송되었습니다. " });
   })();
 });
