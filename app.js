@@ -38,9 +38,9 @@ app.post("/slack", (req, res) => {
   })();
 });
 
-app.use((req, res, next) => { // 기본경로나 /user말고 다른곳 진입했을경우 실행
-    res.status(404).send('Not Found');
-});
+// app.use((req, res, next) => { // 기본경로나 /user말고 다른곳 진입했을경우 실행
+//     res.status(404).send('Not Found');
+// });
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
