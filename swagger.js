@@ -12,7 +12,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3001", // 요청 URL
+        url: process.env.BACK_URL, // 요청 URL
       },
     ],
   },
