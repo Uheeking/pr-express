@@ -4,6 +4,8 @@ const port = 3001;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { WebClient } = require("@slack/web-api");
+const index = require('./index')
+const { swaggerUi, specs } = require("./swagger")
 require("dotenv").config();
 
 const API_TOKEN = process.env.API_TOKEN;
@@ -13,6 +15,9 @@ const conversationId = process.env.CONVERSATIONID;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs))
 
 app.post("/slack", (req, res) => {
   (async () => {
